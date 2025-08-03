@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:interacting_tom/features/providers/animation_state_controller.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' hide LinearGradient;
 
-class AnimationScreen extends ConsumerStatefulWidget {
+class AnimationScreen extends StatefulWidget {
   const AnimationScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _AnimationScreenState();
+  State<AnimationScreen> createState() => _AnimationScreenState();
 }
 
-class _AnimationScreenState extends ConsumerState<AnimationScreen> {
+class _AnimationScreenState extends State<AnimationScreen> {
   Artboard? riveArtboard;
   SMIBool? isHearing;
   SMIBool? talk;
@@ -46,27 +43,57 @@ class _AnimationScreenState extends ConsumerState<AnimationScreen> {
     );
   }
 
-  void _toggleAnimation(AnimationState newValue) {
-    print('toggle animation, is hearing: ${newValue.isHearing}');
-    isHearing?.value = newValue.isHearing;
-    talk?.value = newValue.isTalking;
-  }
-
-  bool get isHearingValue => isHearing?.value ?? false;
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    final animState = ref.watch(animationStateControllerProvider);
     print('Built animation screen');
-    _toggleAnimation(animState);
-    return Center(
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFFF9F6F0), // Vanilla
+            Color(0xFFF5F1EB), // Cream
+          ],
+        ),
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Center(
         child: riveArtboard == null
-            ? const SizedBox()
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFA0724C).withOpacity(0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.pets,
+                      size: 40,
+                      color: Color(0xFF8B5A3C),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Loading Bear...',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF8B5A3C),
+                    ),
+                  ),
+                ],
+              )
             : Rive(
                 artboard: riveArtboard!,
-                alignment: Alignment.bottomCenter,
-                // fit: BoxFit.cover,
-              ));
+                alignment: Alignment.center,
+                fit: BoxFit.contain,
+              ),
+      ),
+    );
   }
 }
