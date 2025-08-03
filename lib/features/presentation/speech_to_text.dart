@@ -1,3 +1,7 @@
+// Temporarily commented out due to Android compatibility issues
+// This file will be re-enabled once we resolve the speech_to_text plugin compatibility
+
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interacting_tom/features/presentation/text_to_speech_cloud.dart';
@@ -102,23 +106,17 @@ class _STTWidgetState extends ConsumerState<STTWidget> {
     }
   }
 
-  bool get _isListening => _speechToText.isListening;
-
   @override
   Widget build(BuildContext context) {
-    print('Built STT widget');
-    print("IS LISTENING: $_isListening");
-
-    final micIcon =
-        _isListening ? const Icon(Icons.mic) : const Icon(Icons.mic_off);
-    final child = TextToSpeechCloud(child: micIcon);
-    // final child = TextToSpeechLocal(child: micIcon);
     return FloatingActionButton(
-        onPressed: () {
-          print("IS LISTENING: $_isListening");
-          _isListening ? _stopListening() : _startListening();
-        },
-        tooltip: _isListening ? 'Pause' : 'Play',
-        child: child);
+      heroTag: "stt_button",
+      onPressed: _speechToText.isListening ? _stopListening : _startListening,
+      backgroundColor: _speechToText.isListening ? Colors.red : Colors.green,
+      child: Icon(
+        _speechToText.isListening ? Icons.stop : Icons.mic,
+        color: Colors.white,
+      ),
+    );
   }
 }
+*/

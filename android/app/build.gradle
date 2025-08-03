@@ -33,16 +33,16 @@ if (flutterVersionName == null) {
 android {
     namespace "com.example.interacting_tom"
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion "25.1.8937393"
+    // ndkVersion "25.1.8937393"  // Disabled NDK - not needed for Flutter apps
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
+                    compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_11
+                    targetCompatibility JavaVersion.VERSION_11
+                }
 
-    kotlinOptions {
-        jvmTarget = '17'
-    }
+                    kotlinOptions {
+                    jvmTarget = '11'
+                }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
