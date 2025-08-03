@@ -52,7 +52,7 @@ Future<List<Voice>> voicesFuture(VoicesFutureRef ref) {
 
 @riverpod
 Future<ByteAudioSource> synthesizeTextFuture(
-    SynthesizeTextFutureRef ref, String text, String lang) {
+    SynthesizeTextFutureRef ref, ({String text, String lang}) params) {
   final googleCloudRepository = ref.read(googleCloudRepositoryProvider);
-  return googleCloudRepository.synthesizeText(text, lang);
+  return googleCloudRepository.synthesizeText(params.text, params.lang);
 }
