@@ -1,10 +1,19 @@
 import 'package:dart_openai/dart_openai.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interacting_tom/env/env.dart';
+import 'package:interacting_tom/firebase_options.dart';
 import 'package:interacting_tom/features/presentation/home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
   OpenAI.apiKey = Env.apiKey;
   if (Env.organization.isNotEmpty) {
     OpenAI.organization = Env.organization;
