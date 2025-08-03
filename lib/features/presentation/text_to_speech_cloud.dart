@@ -31,8 +31,8 @@ class _TextToSpeechState extends ConsumerState<TextToSpeechCloud> {
         ref.read(animationStateControllerProvider).language;
 
     final audioBytes =
-        await ref.read(synthesizeTextFutureProvider(text, currentLang).future);
-    player.setAudioSource(audioBytes);
+        await ref.read(synthesizeTextFutureProvider((text: text, lang: currentLang)).future);
+    player.setAudioSource(audioBytes as AudioSource);
     updateTalkingAnimation(true);
     player.play();
   }
