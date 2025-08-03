@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:interacting_tom/features/presentation/animation_screen.dart';
 import 'package:interacting_tom/features/presentation/flag_switch.dart';
-import 'package:interacting_tom/features/presentation/speech_to_text.dart';
+// import 'package:interacting_tom/features/presentation/speech_to_text.dart';  // Temporarily commented out
 import 'package:interacting_tom/features/presentation/voice_recording_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,13 +12,15 @@ class HomeScreen extends StatelessWidget {
     print('home screen built');
     return Scaffold(
       body: const AnimationScreen(),
-      floatingActionButton: Wrap(
-        direction: Axis.vertical,
-        spacing: 30,
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           const FlagSwitch(), 
-          const STTWidget(),
+          const SizedBox(height: 30),
+          // const STTWidget(),  // Temporarily commented out
+          // const SizedBox(height: 30),
           FloatingActionButton(
+            heroTag: "voice_recording_button",
             onPressed: () {
               Navigator.push(
                 context,
