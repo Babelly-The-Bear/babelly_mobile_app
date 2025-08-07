@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:interacting_tom/features/presentation/animation_screen.dart';
 import 'package:interacting_tom/features/presentation/flag_switch.dart';
-// import 'package:interacting_tom/features/presentation/speech_to_text.dart';  // Temporarily commented out
 import 'package:interacting_tom/features/presentation/voice_recording_screen.dart';
+import 'package:interacting_tom/features/presentation/recording_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool isRecording = false;
+  int sessionsToday = 0;
+  double avgScore = 85.5;
 
   @override
   Widget build(BuildContext context) {
